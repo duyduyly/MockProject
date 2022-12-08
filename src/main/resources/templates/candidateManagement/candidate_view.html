@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Candidate View</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+	<th:block th:include="/layout/_nav"></th:block>
+	<main class="row mx-0">
+		<th:block th:include="/layout/_sidebar"></th:block>
+		<div class="col">
+			<div class="container">
+				<div class="p-3">
+					<h2 class="fw-normal" id="viewCandidateTitle">Candidate</h2>
+					<h2 class="fw-normal" id="updateCandidateTitle" style="display: none;">Update Candidate Profile</h2>
+				</div>
+
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="candidate-tab" data-bs-toggle="tab"
+							data-bs-target="#information" type="button" role="tab" aria-controls="home"
+							aria-selected="true">Candidate Information</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="result-tab" data-bs-toggle="tab" data-bs-target="#result"
+							type="button" role="tab" aria-controls="profile" aria-selected="false">Result</button>
+					</li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active" id="information" role="tabpanel"
+						aria-labelledby="candidate-tab">
+						<div class="d-flex align-items-center bg-primary bg-gradient">
+							<p class="m-0 p-2">Personal Information</p>
+						</div>
+						<table class="table table-bordered">
+							<tbody th:object="${candidateCriteriaModel}">
+								<tr>
+									<th>Empl ID</th>
+									<td th:field="*{id}" th:utext="*{id}"></td>
+									<th>Type</th>
+									<td th:field="*{type}" th:utext="*{type}"></td>
+									<th>Status</th>
+									<td th:field="*{status}" th:utext="*{status}"></td>
+								</tr>
+								<tr>
+									<th>Application Date</th>
+									<td th:field="*{applicationDate}" th:utext="*{applicationDate}" colspan="2"></td>
+									<th>Channel</th>
+									<td th:field="*{channel}" th:utext="*{channel}" colspan="2"></td>
+								</tr>
+								<tr>
+									<th>Site</th>
+									<td th:field="*{location}" th:utext="*{location}" colspan="2"></td>
+									<th>Account</th>
+									<td th:field="*{account}" th:utext="*{account}" colspan="2"></td>
+								</tr>
+								<tr>
+									<th>Name</th>
+									<td th:field="*{fullName}" th:utext="*{fullName}" colspan="2"></td>
+									<th>Gender</th>
+									<td th:field="*{gender}" th:utext="*{gender}" colspan="2"></td>
+								</tr>
+								<tr>
+									<th>DOB</th>
+									<td th:field="*{dateOfBirth}" th:utext="*{dateOfBirth}" colspan="2"></td>
+									<th>CV</th>
+									<td th:field="*{cv}" th:utext="*{cv}" colspan="2"></td>
+								</tr>
+								<tr>
+									<th>University</th>
+									<td th:field="*{university}" th:utext="*{university}" colspan="2"></td>
+									<th>Faculty</th>
+									<td th:field="*{faculty}" th:utext="*{faculty}" colspan="2"></td>
+								</tr>
+								<tr>
+									<th>Phone</th>
+									<td th:field="*{phone}" th:utext="*{phone}" colspan="2"></td>
+									<th>Email</th>
+									<td th:field="*{email}" th:utext="*{email}" colspan="2"></td>
+								</tr>
+								<tr>
+									<th>Skill</th>
+									<td th:field="*{skill}" th:utext="*{skill}" colspan="2"></td>
+									<th>Graduation Year</th>
+									<td th:field="*{graduationYear}" th:utext="*{graduationYear}" colspan="2"></td>
+								</tr>
+								<tr>
+									<th>Foreign Language</th>
+									<td th:field="*{foreignLanguage}" th:utext="*{foreignLanguage}" colspan="2"></td>
+									<th>Level</th>
+									<td colspan="2"></td>
+								</tr>
+								<tr>
+									<th>Note</th>
+									<td th:field="*{note}" th:utext="*{note}" colspan="6"></td>
+								</tr>
+								<tr>
+									<th>History</th>
+									<td th:field="*{history}" th:utext="*{history}" colspan="6"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<!-- Result tab -->
+					<div class="tab-pane fade" id="result" role="tabpanel" aria-labelledby="result-tab">
+						<!-- View -->
+						<div id="viewCandidate">
+							<div>
+								<div class="d-flex align-items-center bg-primary bg-gradient">
+									<div class="px-3 border-end">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+											<path
+												d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+										</svg>
+									</div>
+									<p class="m-0 p-2">Entry Test</p>
+								</div>
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th scope="col">Time</th>
+											<th scope="col">Date</th>
+											<th scope="col">Language Valuator</th>
+											<th scope="col">Language Point</th>
+											<th scope="col">Technical Valuator</th>
+											<th scope="col">Technical Point</th>
+											<th scope="col">Result</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>..</td>
+											<td>..</td>
+											<td>..</td>
+											<td>..</td>
+											<td>..</td>
+											<td>..</td>
+											<td>..</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<br>
+							<div>
+								<div class="d-flex align-items-center bg-primary bg-gradient">
+									<div class="px-3 border-end">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+											<path
+												d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+										</svg>
+									</div>
+									<p class="m-0 p-2">Interview</p>
+								</div>
+								<table class="table table-bordered" style="width: 100%">
+									<thead>
+										<tr>
+											<th>Time</th>
+											<th>Date</th>
+											<th>Interviewer</th>
+											<th style="width: 50%">Comment</th>
+											<th>Result</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="candidate,status : ${listCandidates}">
+											<td>..</td>
+											<td>..</td>
+											<td>..</td>
+											<td>..</td>
+											<td>..</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- Update -->
+						<div id="updateCandidate" style="display: none;">
+							<div>
+								<div class="d-flex align-items-center bg-primary bg-gradient rounded-top">
+									<div class="px-3 border-end">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+											<path
+												d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+										</svg>
+									</div>
+									<p class="m-0 p-2">Entry Test</p>
+								</div>
+								<div class="scrollable table-responsive">
+									<table class="table table-bordered">
+										<thead class="table-light">
+											<tr>
+												<td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+														fill="currentColor" class="bi bi-plus-circle-fill text-primary"
+														viewBox="0 0 16 16">
+														<path
+															d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+													</svg></td>
+												<td>Time</td>
+												<td>Date</td>
+												<td>Language Valuator</td>
+												<td>Language Point</td>
+												<td>Technical Valuator</td>
+												<td>Technical Point</td>
+												<td>Result</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="candidate,status : ${listCandidates}">
+												<td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+														fill="currentColor" class="bi bi-trash3-fill text-danger"
+														viewBox="0 0 16 16">
+														<path
+															d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+													</svg></td>
+												<td>..</td>
+												<td>..</td>
+												<td>..</td>
+												<td>..</td>
+												<td>..</td>
+												<td>..</td>
+												<td>..</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<br>
+							<div>
+								<div class="d-flex align-items-center bg-primary bg-gradient rounded-top">
+									<div class="px-3 border-end">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+											<path
+												d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+										</svg>
+									</div>
+									<p class="m-0 p-2">Interview</p>
+								</div>
+								<div class="scrollable table-responsive">
+									<table class="table table-bordered">
+										<thead class="table-light">
+											<tr>
+												<td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+														fill="currentColor" class="bi bi-plus-circle-fill text-primary"
+														viewBox="0 0 16 16">
+														<path
+															d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+													</svg></td>
+												<td>Time</td>
+												<td>Date</td>
+												<td>Interviewer</td>
+												<td>Comment</td>
+												<td>Result</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="candidate,status : ${listCandidates}">
+												<td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+														fill="currentColor" class="bi bi-trash3-fill text-danger"
+														viewBox="0 0 16 16">
+														<path
+															d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+													</svg></td>
+												<td>..</td>
+												<td>..</td>
+												<td>..</td>
+												<td>..</td>
+												<td>..</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<br>
+							<div class="d-flex">
+								<button sec:authorize="hasAnyRole('FA_MANAGER','FA_REC')" data-bs-toggle="modal"
+									data-bs-target="#submitCandidate" class="btn btn-primary"
+									type="button">Submit</button>
+								<button type="button" th:onclick="|window.location.href='/candidate/listing'|"
+									class="btn btn-outline-secondary col-sm-2 me-1">
+									<div class="row">
+										<i class="bi bi-arrow-90deg-left text-danger col-sm-1"></i>
+										<span class="col">Close</span>
+									</div>
+								</button>
+							</div>
+
+							<!--submit candidate Modal -->
+							<div class="modal fade" id="submitCandidate" tabindex="-1"
+								aria-labelledby="submitCandidateLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h6 class="modal-title" id="submitCandidateLabel">Confirm</h6>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<div class="modal-body text-center">
+											<i class="bi bi-info-circle-fill text-success"></i> Are you
+											sure to submit?
+										</div>
+										<div class="modal-footer">
+											<button type="submit" name="buttonType" value="submitCandidate"
+												class="btn btn-primary"
+												th:formaction="@{'/candidate/listing'}">OK</button>
+											<button type="button" class="btn btn-secondary"
+												data-bs-dismiss="modal">Cancel</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--End of delete candidate Modal -->
+						</div>
+					</div>
+
+					<br>
+					<div class="row" id="viewCandidateBtnGroup">
+						<div class="mb-3">
+							<button sec:authorize="hasAnyRole('FA_MANAGER','FA_REC')" type="button"
+								class="btn btn-outline-secondary" id="updateCandidateBtn">
+								<i class="bi bi-arrow-up-circle-fill text-info"></i> Update
+								Candidate
+							</button>
+							<button sec:authorize="hasAnyRole('FA_MANAGER','FA_REC')" type="button"
+								class="btn btn-outline-secondary">
+								<i class="bi bi-x-circle-fill text-danger"></i> Delete Candidate
+							</button>
+						</div>
+					</div>
+
+
+				</div>
+	</main>
+	<th:block th:include="/layout/_footer"></th:block>
+
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript">
+
+		$(function () {
+			$("#updateCandidateBtn").click(function () {
+				$("#information").removeClass("active show");
+				$("#result").addClass("active show");
+				$("#viewCandidate").css("display", "none");
+				$("#viewCandidateBtnGroup").css("display", "none");
+				$("#viewCandidateTitle").css("display", "none");
+				$("#updateCandidate").css("display", "block");
+				$("#updateCandidateTitle").css("display", "block");
+			});
+
+		});
+
+	</script>
+
+</body>
+
+
+</html>

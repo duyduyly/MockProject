@@ -1,0 +1,42 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org"
+	class="col-2 bg-light border border-1 border-top-0 border-bottom-0 px-0"
+	style="height: inherit;">
+	<ul class="list-group border-0">
+		<li
+			class="list-group-item list-group-item-action border-0 text-end bg-light"><a
+			class="text-decoration-none"><i class="bi bi-chevron-double-left"></i></a></li>
+		<li class="list-group-item list-group-item-action border-0 bg-light"><p>Your
+				role now is:</p>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control"
+					th:value="${#authentication.getPrincipal().authorities}"
+					aria-label="Text input with dropdown button">
+				<button class="btn btn-outline-secondary dropdown-toggle"
+					type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+				<ul class="dropdown-menu dropdown-menu-end">
+					<li th:each="authority : ${#authentication.getAuthorities()}">
+						<a class="dropdown-item" th:text="${authority.getAuthority()}"></a>
+					</li>
+				</ul>
+			</div></li>
+		<li class="list-group-item list-group-item-action border-0 bg-light"><a
+			th:href="@{/dashboard}" class="text-decoration-none"><i
+				class="bi bi-circle-fill"></i> Dashboard</a></li>
+		<li class="list-group-item list-group-item-action border-0 bg-light"><a
+			th:href="@{/classBatch/listing}" class="text-decoration-none"><i
+				class="bi bi-circle-fill"></i> Class Management</a></li>
+		<li class="list-group-item list-group-item-action border-0 bg-light"><a
+			th:href="@{/candidate/listing}" class="text-decoration-none"><i
+				class="bi bi-circle-fill"></i> Candidate Management</a></li>
+		<li class="list-group-item list-group-item-action border-0 bg-light"><a
+			th:href="@{/trainee/listing}" class="text-decoration-none"><i
+				class="bi bi-circle-fill"></i> Trainee Management</a></li>
+		<li class="list-group-item list-group-item-action border-0 bg-light"><a
+			th:href="@{/trainer/listing}" class="text-decoration-none"><i
+				class="bi bi-circle-fill"></i> Trainer Managament</a></li>
+		<li class="list-group-item list-group-item-action border-0 bg-light"><a
+			th:href="@{/general_setting}" class="text-decoration-none"><i
+				class="bi bi-circle-fill"></i> General Setting</a></li>
+	</ul>
+</div>

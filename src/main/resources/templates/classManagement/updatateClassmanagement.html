@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+    <link th:href="@{/resourcClassBatchManagement/css/buttonCollapseCustom.css}" rel="stylesheet" media="screen">
+
+    <title>Class Management</title>
+</head>
+<stype>
+	.hide {
+    opacity: 0;
+}
+</stype>
+<body>
+    <th:block th:include="/layout/_nav"></th:block>
+
+    <main class="row mx-0">
+        <th:block th:include="/layout/_sidebar"></th:block>
+
+        <div class="col">
+            <div class="container">
+                <div class="pt-4 border-0 border-bottom">
+                    <h1 class="fw-normal">Update Class</h1>
+                </div>
+                
+                <!-- tạo scope cho angular -->
+                <div ng-app="myapp" ng-controller="myctrl">
+               <!--  th:action="@{/classBatch/update}" -->
+                    <form th:action="@{/classBatch/update}" method="POST"
+                        enctype="multipart/form-data">
+                       
+                        <!-- div form class batch management -->
+                        <div th:object="${classBatchForm}">
+                            <div class="row">
+
+                                <a class="button btn btn-info col-sm-12" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse1" aria-expanded="true"><span class="button__icon">
+                                        <i class="bi bi-caret-down-fill"></i>
+                                    </span>
+                                    <span class="button__text">General</span></a>
+
+                                <!-- start form 1 -->
+                                <div id="collapse1" class="collapse show">
+
+                                    <!-- row 1 -->
+                                    <div class="row ">
+                                        <div class="col-sm-4 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="classCode">Class code</label>
+                                                <input class="col-sm-6 inputBackGroud" type="text"
+                                                    th:field="*{classCode}" id="classCode" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="className">className</label>
+                                                <input class="col-sm-6 inputBackGroud" type="text"
+                                                    th:field="*{className}" id="className" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="classStatus">Class status</label>
+                                                <input class=" inputBackGroud" type="text"
+                                                    th:field="*{classStatus.id}"  id="classStatus" style=" position: absolute;top: -9999px;left: -9999px;" readonly>
+                                                 <p class="col-sm-5 inputBackGroud" 
+                                                    th:text="${status}" style="height: 30px;width: 200px">
+	                                      </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 1 -->
+
+                                    <!-- row 2 -->
+                                    <div class="row">
+                                        <div class="col-sm-4 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="plannedTrainee">Planned
+                                                    Trainee</label>
+                                                <!-- plannedTraineeNumber -->
+                                                <input class="col-sm-6" type="text" th:field="*{plannedTraineeNumber}"
+                                                    id="plannedTrainee">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="acceptedTraineeNo">Accepted Trainee
+                                                    No</label>
+                                                <input class="col-sm-6 inputBackGroud" type="text"
+                                                    th:field="*{acceptedTraineeNumber}" id="acceptedTraineeNo" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="actualTraineeNo">Actual Trainee
+                                                    No</label>
+                                                <input class="col-sm-6 inputBackGroud" type="text"
+                                                    th:field="*{actualTraineeNumber}" id="actualTraineeNo" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 2 -->
+
+                                    <!-- row 3 -->
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="expectedStartDate">Expected Start
+                                                    Date</label>
+                                                <input class="col-sm-6" type="date" placeholder="yyyy-mm-dd"
+                                                    min="1997-01-01" max="2030-12-31" th:field="*{expectedStartDate}"
+                                                    id="expectedStartDate" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="expectedEndDate">Expected End
+                                                    Date</label>
+                                                <input class="col-sm-6" type="date" th:field="*{expectedEndDate}"
+                                                    id="expectedEndDate" placeholder="yyyy-mm-dd" min="1997-01-01"
+                                                    max="2030-12-31">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 3 -->
+
+                                    <!-- row 4 -->
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="location">Location</label>
+                                                <select class="col-sm-6" th:field="*{location}" id="location">
+                                                    <option th:each="location :${locationList}"
+                                                        th:value="${location.id}"><span
+                                                            th:text="${location.locationName}"></span></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="detailedLocation">Detailed
+                                                    Location</label>
+                                                <input class="col-sm-6" type="text" th:field="*{detailLocation}"
+                                                    id="detailedLocation" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 4 -->
+
+                                    <!-- row 5 -->
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="bubgetCode">Bubget Code</label>
+                                                <Select class="col-sm-6" th:field="*{budget}" id="bubgetCode">
+                                                    <option th:each="budget : ${budgetList}" th:value="${budget.id}">
+                                                        <span th:text="${budget.budgetName}"></span>
+                                                    </option>
+                                                </Select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="estimatedBudget">Estimated
+                                                    Budget</label>
+                                                <input class="col-sm-6" type="text" th:field="*{estimatedBudget}"
+                                                    id="estimatedBudget">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 5 -->
+
+                                    <!-- row 6 -->
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="classAdmin">Class Admin</label>
+                                                <Select class="col-sm-6" th:field="*{classAdmin}" id="classAdmin">
+                                                    <option th:each="classAdmin : ${classAdminList}"
+                                                        th:value="${classAdmin.id}"><Span
+                                                            th:text="${classAdmin.classAdminProfile.fullName}"></Span>
+                                                    </option>
+                                                </Select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="learningPath">Learning path</label>
+                                                <Select class="col-sm-6" th:field="*{learningPath}" id="learningPath">
+                                                    <option th:each="learningPath : ${learningPathList}"
+                                                        th:value="${learningPath.id}">
+                                                        <span th:text="${learningPath.learningPathName}"></span>
+                                                    </option>
+                                                </Select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 6 -->
+
+                                    <!-- row 7 -->
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 border" for="history">History</label>
+                                                <input class="col-sm-9 inputBackGroud" type="text" th:field="*{history}"
+                                                    id="history"  readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 7 -->
+                                </div>
+                            </div>
+                            <!-- end form 1 -->
+                            <br>
+
+                            <!-- start form 2 -->
+                            <div class="row">
+                                <a class="button btn btn-info col-sm-12" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse2" aria-expanded="true"><span class="button__icon">
+                                        <i class="bi bi-caret-down-fill"></i>
+                                    </span>
+                                    <span class="button__text">Detail</span></a>
+                                <div id="collapse2" class="collapse show">
+
+                                    <!-- row 1 -->
+                                    <div class="row ">
+                                        <div class="col-sm-4 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="subjectType">Subject Type</label>
+                                                <select class="col-sm-6" th:field="*{subjectType}" id="subjectType">
+                                                    <option th:each="subType : ${subTypeList}" th:value="${subType.id}">
+                                                        <span th:text="${subType.subjectTypeName}"></span>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="subSubjectType">Sub-Subject
+                                                    Type</label>
+                                                <select class="col-sm-6" th:field="*{subSubjectType}"
+                                                    id="subSubjectType">
+                                                    <option th:each="subSubType : ${subSubTypeList}"
+                                                        th:value="${subSubType.id}"><span
+                                                            th:text="${subSubType.subSubjectTypeName}"></span></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="deliveryType">Delivery Type</label>
+                                                <select class="col-sm-6" th:field="*{deliveryType}" id="deliveryType">
+                                                    <option th:each="deliveryType : ${deliveryTypeList}"
+                                                        th:value="${deliveryType.id}">
+                                                        <span th:text="${deliveryType.deliveryTypeName}"></span>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 1 -->
+
+                                    <!-- row 2 -->
+                                    <div class="row">
+                                        <div class="col-sm-4 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="formatType">Format Type</label>
+                                                <select class="col-sm-6" th:field="*{formatType}" id="formatType">
+                                                    <option th:each="formatType : ${formatTypeList}"
+                                                        th:value="${formatType.id}"><span
+                                                            th:text="${formatType.formatTypeName}"></span></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="scope">Scope</label>
+                                                <select class="col-sm-6" th:field="*{scope}" id="scope">
+                                                    <option th:each="scope : ${scopeList}" th:value="${scope.id}"><span
+                                                            th:text="${scope.scopeName}"></span></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-4 border" for="supplier/Partner">Supplier/
+                                                    Partner</label>
+                                                <!-- <textarea class="col-sm-5"  cols="3" rows="1" 
+                                    id="supplier/Partner">
+			                	</textarea> -->
+                                                <select class="col-sm-8" id="supplier/PartnerSelect"
+                                                    th:field="*{supplierPartner}">
+                                                    <option th:each="supplierPartner : ${supplierPartnerList}"
+                                                        th:value="${supplierPartner.id}"><span
+                                                            th:text="${supplierPartner.supplierPartnerName}"></span>
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 2 -->
+
+                                    <!-- row 3 -->
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="actualStartDate">Actual Start
+                                                    Date</label>
+                                                <input class="col-sm-6 inputBackGroud" type="date" placeholder=" "
+                                                    th:field="*{actualStartDate}" id="actualStartDate" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="actualEndDate">Actual End
+                                                    Date</label>
+                                                <input class="col-sm-6 inputBackGroud" type="date"
+                                                    th:field="*{actualEndDate}" id="actualEndDate" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 3 -->
+
+                                    <!-- row 4 -->
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="masterTrainer">Master
+                                                    Trainer</label>
+
+                                                <select class="col-sm-6" th:field="*{masterTrainer.id}"
+                                                    id="masterTrainer">
+                                                    <!-- list Trainer -->
+                                                    <option th:each="trainer : ${trainerList}" th:value="${trainer.id}">
+                                                        <span th:text="${trainer.trainerProfile.fullName}"></span>
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="trainer">Trainer</label>
+                                                <!-- Choose Trainer -->
+
+                                                <div class="col-sm-6">
+                                                    <!-- Button trigger modal -->
+                                                    <a type="button " class="btn btn-primary " data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal">Choose trainer</a>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                                        Trainer</h5>
+                                                                    <a type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></a>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <table>
+                                                                        <tr class="border-bottom "
+                                                                            th:each="trainer : ${trainerList}">
+                                                                            <td> <input type="checkbox"
+                                                                                    th:field="*{setOfTrainers}"
+                                                                                    th:value="${trainer.id}"> <span
+                                                                                    th:text="${trainer.trainerProfile.fullName}"></span>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    </table>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal" onclick="">Close</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- end choose trainer -->
+                                                <!-- <select class="col-sm-6" th:field="*{setOfTrainers}" id="trainer">
+                    	list Trainer
+                        <option th:each="trainer : ${listTrainer}" th:value="${trainer}"><span th:text="${trainer.trainerProfile.fullName}"></span></option>
+                      
+                    </select> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 4 -->
+
+                                    <!-- row 5 -->
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group border">
+                                            <div class="row">
+                                                <label class="col-sm-4 border" for="curriculum">Curriculumn</label>
+                                                <input class="col-sm-8" type="file" style="margin: 0px;"
+                                                    name="curriculumFile" id="curriculum">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-4 border" for="remarks">Remarks</label>
+                                                <textarea class="col-sm-8" cols="3" rows="2" th:field="*{remarks}"
+                                                    id="remarks">
+                	                            </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row 5 -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end form 2 -->
+                        <br>
+                        <!-- start form 3 -->
+                        <div class="row" >
+                            <div class="con-sm-12">
+                                <div class="row">
+                                    <a class="button btn btn-info col-sm-12" data-bs-toggle="collapse"
+                                        data-bs-target="#Bubget" aria-expanded="true"><span class="button__icon">
+                                            <i class="bi bi-caret-down-fill"></i>
+                                        </span>
+                                        <span class="button__text">Bubget</span></a>
+                                </div>
+                            </div>
+                            <div id="Bubget" class="collapse show">
+                              
+                                    <!-- row 1 -->
+                                    <div class="row ">
+                                        <div class="col-sm-6 form-group">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="total">Total</label>
+                                                <input type="text" class="col-sm-6 inputBackGroud" id="total"
+                                                    name="total">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 form-group ">
+                                            <div class="row">
+                                                <label class="col-sm-6 border" for="overBubget">Over Budget</label>
+                                                <input type="text" class="col-sm-6 inputBackGroud" name="overBubget"
+                                                    id="overBubget">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col" style="max-width: 50px;">
+                                            <div class="row">
+                                                <div class="col-sm-12 ">
+                                                    <span style="border: 1px none black;">. </span>
+                                                </div>
+                                                <div class="col-sm-12 border-2 " ng-click="updateOrSave(item, unit, unitExpense
+        		  																			, quantity, amount, tax, sum, note)">
+                                                    <i class="bi bi-plus-circle-fill"
+                                                        style="margin-top: 10px; margin-left: 8px; "></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- col 1 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="item">Item</label>
+                                                <input type="text" class="col-sm-12" ng-model="item" name="item" id="item" >
+                                            </div>
+                                        </div>
+
+                                        <!-- col 2 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="unit">Unit</label>
+                                                <input type="text" class="col-sm-12" ng-model="unit" name="unit" id="unit">
+                                            </div>
+                                        </div>
+
+                                        <!-- col 3 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="unitExpense">Unit Expense</label>
+                                                <input type="text" class="col-sm-12" ng-model="unitExpense" name="unitExpense"
+                                                    id="unitExpense">
+                                            </div>
+                                        </div>
+
+                                        <!-- col 4 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="quantity">Quantity</label>
+                                                <input type="text" class="col-sm-12" ng-model="quantity" name="quantity" id="quantity">
+                                            </div>
+                                        </div>
+
+                                        <!-- col 5 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="amount">Amount</label>
+                                                <input type="text" class="col-sm-12" ng-model="amount" name="amount" id="amount" readonly>
+                                            </div>
+                                        </div>
+
+                                        <!-- col 6 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="tax">Tax</label>
+                                                <input type="text" class="col-sm-12" ng-model="tax" name="tax" id="tax">
+                                            </div>
+                                        </div>
+
+                                        <!-- col 7 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="sum">Sum</label>
+                                                <input type="text" class="col-sm-12" ng-model="sum" name="sum" id="sum" readonly>
+                                            </div>
+                                        </div>
+
+                                        <!-- col 8 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="note">Note</label>
+                                                <input type="text" class="col-sm-12" ng-model="note"  name="note" id="note">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- end row 1 -->
+
+                                    <!-- form load start -->
+                                    <!-- row 1 -->
+									<br>
+                                    <div class="row" style="font-size: 13px; ">
+										<div ng-repeat="b in budgetDetailSendToSever">
+                                       
+                                       <div class="row">
+
+                                        <div class="col" style="max-width: 50px;">
+                                            <div class="row">
+                                                <div class="col-sm-12 ">
+                                                    <span style="border: 1px none black;">. </span>
+                                                </div>
+                                                <div class="col-sm-12 border-2 " ng-click="updateOrSave(b.item, b.unit, b.unitExpense
+        		  																			, b.quantity, b.amount, b.tax, b.sum, b.note)">
+                                                    <i class="bi bi-plus-circle-fill"
+                                                        style="margin-top: 10px; margin-left: 8px; "></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- col 1 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="item">Item</label>
+                                                <input type="text" class="col-sm-12" ng-model="b.item" value="{{b.item}}" name="item" id="item" readonly>
+                                            </div>
+                                        </div>
+
+                                        <!-- col 2 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="unit">Unit</label>
+                                                <input type="text" class="col-sm-12" ng-model="b.unit" value="{{b.unit}}" name="unit" id="unit">
+                                            </div>
+                                        </div>
+
+                                        <!-- col 3 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="unitExpense">Unit Expense</label>
+                                                <input type="text" class="col-sm-12" ng-model="b.unitExpense" value="{{b.unitExpense}}" name="unitExpense"
+                                                    id="unitExpense">
+                                            </div>
+                                        </div>
+
+                                        <!-- col 4 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="quantity">Quantity</label>
+                                                <input type="text" class="col-sm-12" ng-model="b.quantity"  value="{{b.quantity}}" name="quantity" id="quantity">
+                                            </div>
+                                        </div>
+
+                                        <!-- col 5 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="amount">Amount</label>
+                                                <input type="text" class="col-sm-12" ng-model="b.amount" value="{{b.amount}}" name="amount" id="amount" readonly>
+                                            </div>
+                                        </div>
+
+                                        <!-- col 6 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="tax">Tax</label>
+                                                <input type="text" class="col-sm-12" ng-model="b.tax" value="{{b.tax}}" name="tax" id="tax">
+                                            </div>
+                                        </div>
+
+                                        <!-- col 7 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="sum">Sum</label>
+                                                <input type="text" class="col-sm-12" ng-model="b.sum" value="{{b.sum}}" name="sum" id="sum" readonly>
+                                            </div>
+                                        </div>
+
+                                        <!-- col 8 -->
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-sm-12 border" for="note">Note</label>
+                                                <input type="text" class="col-sm-12" ng-model="b.note" value="{{b.note}}" name="note" >
+                                            </div>
+                                        </div>
+                                    </div>
+										</div>
+                                        <!-- đổ dữ liệu lên form -->
+
+                                    </div>
+                                    <!-- form load end -->
+                            </div>
+                        </div>
+                        <!-- end form 3 -->
+
+                        <br>
+
+                        <!-- start audit Form -->
+                        <!-- start form 4 -->
+                        <div class="row" th:object="${auditFormOfClassBatch}">
+                            <div class="con-sm-12">
+                                <div class="row">
+                                    <a class="button btn btn-info col-sm-12" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse4" aria-expanded="true"><span class="button__icon">
+                                            <i class="bi bi-caret-down-fill"></i>
+                                        </span>
+                                        <span class="button__text">Audit</span></a>
+                                </div>
+                            </div>
+                            <div id="collapse4" class="collapse show">
+
+                                <div class="row">
+
+                                    <!-- <div class="col-sm-1" style="max-width: 40px;">
+                        <div class="row">
+                            <span class="col-sm-12 ms-1 " style="border: 1px solid black;"></span>
+                            <span class="col-sm-12 ms-1 " style="border: 1px solid black; height: 28px;"></span>
+                        </div>
+                    </div> -->
+
+
+                                    <!-- col 1 -->
+                                    <div class="col">
+                                        <div class="row">
+                                            <label class="col-sm-12 border" for="date">Date</label>
+                                            <input type="date" class="col-sm-12" th:field="*{date}" id="date">
+                                        </div>
+                                    </div>
+
+                                    <!-- col 2 -->
+                                    <div class="col">
+                                        <div class="row">
+                                            <label class="col-sm-12 border" for="eventCategory">Event Category</label>
+                                            <select class="col-sm-12 " style="height: 28px;" th:field="*{eventCategoty}"
+                                                id="eventCategory">
+                                                <option th:each="eventCategory1 : ${eventCategoryList}"
+                                                    th:value="${eventCategory1}">
+                                                    <span th:text="${eventCategory1}"></span>
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- col 3 -->
+                                    <div class="col">
+                                        <div class="row">
+                                            <label class="col-sm-12 border" for="relatedPeople">Related People</label>
+                                                <select th:field="*{relatedPartyPeople}">
+                                                	<option th:each="relatedPartyPeople : ${relatedPeopleList}" th:value="${relatedPartyPeople.id}">
+                                                	<span th:text="${relatedPartyPeople.trainerProfile.fullName}"></span></option>
+                                                </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- col 4 -->
+                                    <div class="col">
+                                        <div class="row">
+                                            <label class="col-sm-12 border" for="action">Action</label>
+                                            <input type="number" class="col-sm-12" min="0" th:field="*{action}" id="action">
+                                        </div>
+                                    </div>
+
+                                    <!-- col 5 -->
+                                    <div class="col">
+                                        <div class="row">
+                                            <label class="col-sm-12 border" for="pic">PIC</label>
+                                            <select class="col-sm-12" th:field="*{pic}" id="pic">
+                                                <!-- list Trainer -->
+                                                <option th:each="trainer : ${trainerList}" th:value="${trainer.id}">
+                                                    <span th:text="${trainer.trainerProfile.fullName}"></span>
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- col 6 -->
+                                    <div class="col">
+                                        <div class="row">
+                                            <label class="col-sm-12 border" for="deadLine">Deadline</label>
+                                            <input type="date" class="col-sm-12" th:field="*{deadline}" id="deadLine">
+                                        </div>
+                                    </div>
+
+                                    <!-- col 7 -->
+                                    <div class="col">
+                                        <div class="row">
+                                            <label class="col-sm-12 border" for="note">Note</label>
+                                            <input type="text" class="col-sm-12" th:field="*{auditNote}" id="noteAudit">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div><button class="btn btn-success" type="submit"  ng-click="send()" >Submit</button>
+                            <a class="btn btn-light">Close</a>
+                        </div>
+
+                        <!-- end form 4 -->
+                    </form>
+                    <!-- end all form -->
+                </div>
+            </div>
+        </div>
+    </main>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	<script type="text/javascript">
+	var app = angular.module("myapp", []);
+    app.controller("myctrl", function ($scope, $http) {
+
+      $http.get("/classBatch/getSetBudGetDetailToForm")
+        .then(function (response) {
+          $scope.budgetDetail = response.data;
+            
+        $scope.item= null;
+        $scope.unit = null;
+        $scope.unitExpense = null;
+        $scope.quantity = null;
+        $scope.amount = null;
+        $scope.tax = null;
+        $scope.sum = null;
+        $scope.note = null;
+            
+        	for(let i = 0;i < $scope.budgetDetail.length;i++){
+        		$scope.budgetDetail[i].item = $scope.budgetDetail[i].item;
+        		$scope.budgetDetail[i].unit = $scope.budgetDetail[i].unit;
+        		$scope.budgetDetail[i].unitExpense = $scope.budgetDetail[i].unitExpense;
+        		$scope.budgetDetail[i].quantity = $scope.budgetDetail[i].quantity;
+        		$scope.budgetDetail[i].amount = $scope.budgetDetail[i].amount;
+        		$scope.budgetDetail[i].tax = $scope.budgetDetail[i].tax;
+        		$scope.budgetDetail[i].sum = $scope.budgetDetail[i].sum;
+        		$scope.budgetDetail[i].note = $scope.budgetDetail[i].note;
+        	}
+        	
+        	$scope.budgetDetailSendToSever = $scope.budgetDetail;
+        	
+        	
+        	$scope.budgetDetailObject;
+          $scope.updateOrSave = function update(item, unit, unitExpense
+        		  , quantity, amount, tax, sum, note){
+        	  
+        	  console.log("budgetForm: "+item)
+        	  console.log("budgetForm: "+unit)
+        	  console.log("budgetForm: "+unitExpense)
+        	  console.log("budgetForm: "+quantity)
+        	  console.log("budgetForm: "+amount)
+        	  console.log("budgetForm: "+tax)
+        	  console.log("budgetForm: "+sum)
+        	  console.log("budgetForm: "+note)
+        	  
+        	  $scope.flag = true;
+        	  for(let i = 0;i < $scope.budgetDetailSendToSever.length;i++){
+          		
+        		  //update
+          		 if($scope.budgetDetailSendToSever[i].item == item){
+          			 
+          			let index = $scope.budgetDetailSendToSever.indexOf(item);
+          			
+          			item.unit = unit;
+          			item.unitExpense = unitExpense;
+          			item.quantity = quantity;
+          			item.amount =amount;
+          			item.tax = tax; 
+          			item.sum = sum;
+          			item.note = note;
+          			
+          			$scope.budgetDetailSendToSever[index] = item;
+          			
+          			$scope.flag = false;
+          			break;
+          		 }else{
+          			 
+          			 // true khi ra khỏi vòng lập tức là chưa tồn tại
+          			$scope.flag = true;
+           	  	 }	
+        	  
+          	}
+        	//amount = unitExpense.value * quantity.value
+        	  //sum = amount-(amount*(tax.value/100));
+        	  //save
+        	  if($scope.flag == true){
+        	  $scope.budgetDetailObject = {
+    					"item":item,
+    					"unit":unit,
+    					"unitExpense":unitExpense,
+    					"quantity":quantity,
+    					"amount":unitExpense*quantity,
+    					"tax":tax,
+    					"sum":(unitExpense*quantity)-((unitExpense*quantity)*(tax/100)),
+    					"note":note
+    					
+    			}
+    			$scope.budgetDetailSendToSever.push(angular.copy($scope.budgetDetailObject));
+        	  }
+        	  console.log("Length: "+$scope.budgetDetailSendToSever.length)
+          }
+          
+          $scope.send = function send1(){
+        	  
+        	  var bubgetDetail = [];
+        	  
+        	  for(let i = 0;i < $scope.budgetDetailSendToSever.length;i++){
+        		  let budgetDetaiObject = {
+                          "item":$scope.budgetDetailSendToSever[i].item
+                         ,"unit":$scope.budgetDetailSendToSever[i].unit
+                         ,"unitExpense":$scope.budgetDetailSendToSever[i].unitExpense
+                         ,"quantity":$scope.budgetDetailSendToSever[i].quantity
+                         ,"amount":$scope.budgetDetailSendToSever[i].amount
+                         ,"tax":$scope.budgetDetailSendToSever[i].tax
+                         ,"sum":$scope.budgetDetailSendToSever[i].sum
+                         ,"note":$scope.budgetDetailSendToSever[i].note
+                         }
+        		  
+        		  console.log("Item: "+$scope.budgetDetailSendToSever[i].item)
+        		  bubgetDetail.unshift(budgetDetaiObject);
+        		  
+        	  }
+        	  $http.post('http://localhost:8080/classBatch/postSetBudGetDetailToForm', JSON.stringify($scope.budgetDetailSendToSever)) //file litle.json
+              .then(function (response) { //thành công                        
+                  if (response.data)
+                  $scope.msg = "Post Data Thành công!"; //JSON.srtingify đổi đối tương javascript thành chuỗi json
+                  },
+                  function (response) { //thất bại
+              $scope.msg = "Post thất bại";
+             
+              });
+        	//Call the services
+              	/* $.ajax({
+                      type: 'POST',
+                      contentType : 'application/json; charset=utf-8',
+                      url:    'http://localhost:8080/classBatch/postSetBudGetDetailToForm',
+                      dataType: 'html',
+                      data: JSON.stringify($scope.budgetDetailSendToSever),
+                      asynch: false,
+                      success : function (response) { //thành công                        
+                          if (response.data)
+                              $scope.msg = "Post Data Thành công!"; //JSON.srtingify đổi đối tương javascript thành chuỗi json
+                              },
+                              function (response) { //thất bại
+                          $scope.msg = "Post thất bại";}
+                      
+                  }); */
+                
+          }
+        });
+    });
+	
+	</script>
+    <!-- footer -->
+    <th:block th:include="/layout/_footer"></th:block>
+
+    <!-- <script th:src="@{/resourcClassBatchManagement/js/budgetDetail.js}"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
